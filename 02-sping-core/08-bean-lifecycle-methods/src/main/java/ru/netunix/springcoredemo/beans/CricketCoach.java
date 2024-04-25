@@ -1,13 +1,13 @@
 package ru.netunix.springcoredemo.beans;
 
-import org.springframework.context.annotation.Lazy;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
-@Lazy
-public class CricketCoach implements Coach{
+public class CricketCoach implements Coach {
     public CricketCoach() {
-        System.out.println("in constructor "+this.getClass().getName());
+        System.out.println("in constructor " + this.getClass().getName());
     }
 
     @Override
