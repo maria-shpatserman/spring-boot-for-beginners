@@ -15,7 +15,7 @@ public class WorkoutController {
     //    define constructor injection
     @Autowired
     public WorkoutController(
-            @Qualifier("baseballCoach") Coach injectCoach
+            @Qualifier("aquatic") Coach injectCoach
     ) {
         System.out.println("in constructor " + this.getClass().getName());
         coach = injectCoach;
