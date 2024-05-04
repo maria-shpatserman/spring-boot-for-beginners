@@ -38,17 +38,12 @@ public class ProductService {
     }
 
     public Mono<ProductDto> updateProduct(Mono<ProductDto> productDtoMono, String id) {
-//        return productRepository.findById(id)
-//                .flatMap(p -> productDtoMono.map(ProductMapper::dtoToEntity)
-//                        .doOnNext(e -> e.setId(id)))
-//                .flatMap(productRepository::save)
-//                .map(ProductMapper::entityToDto);
-        //
-         Mono<Product> productMono = productRepository.findById(id);
-         Mono<Product> product = productDtoMono.map(ProductMapper::dtoToEntity);
-         product.doOnNext(e->e.setId(id));
-        product.map(productRepository::save);
-        return product.map(ProductMapper::entityToDto);
+        return productRepository.findById(id)
+                .flatMap(p -> productDtoMono.map(ProductMapper::dtoToEntity)
+                        .doOnNext(e -> e.setId(id)))
+                .flatMap(productRepository::save)
+                .map(ProductMapper::entityToDto);
+
     }
     public Mono<Void> deleteProduct(String id){
         return productRepository.deleteById(id);
