@@ -47,23 +47,6 @@ public final class StudentRestController {
                .orElseThrow(()->new StudentNotFoundException(String.format("Student with id %d not found",id)));
     }
 
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse>  handleException(StudentNotFoundException exception){
-      ;
-      return new ResponseEntity<>(StudentErrorResponse.builder()
-              .message(exception.getMessage())
-              .status(HttpStatus.NOT_FOUND.value())
-              .timeStamp(System.currentTimeMillis()).build(),HttpStatus.NOT_FOUND);
 
-    }
-    //add new exception handler
-    @ExceptionHandler
-    public ResponseEntity<StudentErrorResponse> handleAllExceptions(Exception exception){
-        return new ResponseEntity<>(StudentErrorResponse.builder()
-                .message(exception.getMessage())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .timeStamp(System.currentTimeMillis()).build(),HttpStatus.BAD_REQUEST);
-
-    }
 
 }
