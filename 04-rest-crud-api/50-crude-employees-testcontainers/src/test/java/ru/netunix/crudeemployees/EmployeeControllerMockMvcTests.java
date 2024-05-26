@@ -2,7 +2,7 @@ package ru.netunix.crudeemployees;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.aspectj.lang.annotation.Before;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,13 +10,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.DynamicPropertyRegistry;
+import org.springframework.test.context.DynamicPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MockMvcBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.testcontainers.containers.MySQLContainer;
 import ru.netunix.crudeemployees.entity.Employee;
 import ru.netunix.crudeemployees.rest.EmployeeRestController;
 import ru.netunix.crudeemployees.service.EmployeeService;
@@ -29,8 +29,26 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 public class EmployeeControllerMockMvcTests {
     @Autowired
     MockMvc mockMvc;
+    static MySQLContainer mySQLContainer = new MySQLContainer<>("mysql:latest");
+
+    @DynamicPropertySource
+    public static void configureProperties(DynamicPropertyRegistry registry) {
+        registry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
+        registry.add("spring.datasource.username",mySQLContainer::getUsername);
+        registry.add("spring.datasource.password",mySQLContainer::getPassword);
+
+    }
+
     @Autowired
     EmployeeService employeeService;
+    @BeforeAll
+    static void beforeAll(){
+        mySQLContainer.start();
+    }
+    @AfterAll
+    static void afterAll(){
+        mySQLContainer.stop();
+    }
 
     @BeforeEach
     public void setup() {
@@ -38,8 +56,9 @@ public class EmployeeControllerMockMvcTests {
                 .build();
 
     }
+
     @Test
-    void shouldCreateMockMvc(){
+    void shouldCreateMockMvc() {
         assertNotNull(mockMvc);
     }
 
@@ -54,7 +73,7 @@ public class EmployeeControllerMockMvcTests {
                 ).andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.*").exists()
 //                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value()
-                        );
+                );
 
 
     }
