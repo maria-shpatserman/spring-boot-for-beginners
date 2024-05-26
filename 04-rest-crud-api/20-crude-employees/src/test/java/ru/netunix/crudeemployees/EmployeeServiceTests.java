@@ -28,7 +28,7 @@ class EmployeeServiceTests {
     private EmployeeDAO daoRepository;
 
     @Test
-    void findEmployeeByIdTest() {
+    void testFindEmployeeById() {
         when(daoRepository.findById(anyInt())).thenReturn(new Employee("Nana", "Yang", "yang@gmail.com"));
         Employee employee = service.findById(15);
         assertEquals("Nana", employee.getFirstName());
@@ -37,7 +37,7 @@ class EmployeeServiceTests {
     }
 
     @Test
-    void findAllTest() {
+    void testFindAll() {
         when(daoRepository.findAll())
                 .thenReturn(Stream.of(
                         new Employee("Mahsha", "Shi", "shi@gmail.com"),
@@ -46,7 +46,7 @@ class EmployeeServiceTests {
     }
 
     @Test
-    void saveEmployeeTest() {
+    void testSaveEmployee() {
         Employee employee = new Employee("XiYa", "Long", "long@gmail.com");
         when(daoRepository.save(employee))
                 .thenReturn(employee);
@@ -56,7 +56,7 @@ class EmployeeServiceTests {
     }
 
     @Test
-    void deleteEmployeeTest() {
+    void testDeleteEmployee() {
         service.deleteById(1);
         verify(daoRepository,times(1)).deleteById(1);
 
