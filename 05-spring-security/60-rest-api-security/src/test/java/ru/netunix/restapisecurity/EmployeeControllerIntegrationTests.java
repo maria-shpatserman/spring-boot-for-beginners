@@ -1,4 +1,4 @@
-package ru.netunix.crudeemployees;
+package ru.netunix.restapisecurity;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
+import org.springframework.http.client.support.BasicAuthenticationInterceptor;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.web.client.RestTemplate;
@@ -34,6 +35,9 @@ public class EmployeeControllerIntegrationTests {
     @BeforeAll
     public static void init() {
         restTemplate = new RestTemplate();
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("test-user","test123"));
+
     }
 
     @BeforeEach
@@ -45,7 +49,7 @@ public class EmployeeControllerIntegrationTests {
 
     @AfterEach
     public void cleanup() {
-        jdbcTemplate.execute("delete  from Employee");
+        jdbcTemplate.execute("delete from Employee");
 
     }
 
@@ -53,6 +57,7 @@ public class EmployeeControllerIntegrationTests {
     @DisplayName("Positive: Get all Employees")
     @Sql(scripts = "classpath:/initialize-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void testGetAllEmployees() {
+
         List<Employee> listEmployee = restTemplate.getForObject(baseUrl, List.class);
         assertEquals(3, listEmployee.size());
 
