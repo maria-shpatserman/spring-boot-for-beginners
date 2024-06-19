@@ -35,8 +35,6 @@ public class EmployeeControllerIntegrationTests {
     @BeforeAll
     public static void init() {
         restTemplate = new RestTemplate();
-        restTemplate.getInterceptors().add(
-                new BasicAuthenticationInterceptor("test-user","test123"));
 
     }
 
@@ -50,6 +48,7 @@ public class EmployeeControllerIntegrationTests {
     @AfterEach
     public void cleanup() {
         jdbcTemplate.execute("delete from Employee");
+        restTemplate.getInterceptors().removeLast();
 
     }
 
@@ -57,6 +56,8 @@ public class EmployeeControllerIntegrationTests {
     @DisplayName("Positive: Get all Employees")
     @Sql(scripts = "classpath:/initialize-data.sql", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     void testGetAllEmployees() {
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("john","test123"));
 
         List<Employee> listEmployee = restTemplate.getForObject(baseUrl, List.class);
         assertEquals(3, listEmployee.size());
@@ -66,6 +67,9 @@ public class EmployeeControllerIntegrationTests {
     @Test
     @DisplayName("Positive: Add Employee")
     public void testAddEmployee() {
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("mary","test123"));
+
         Employee employee = new Employee("SiYa", "Long", "siya@gmail.com");
         Employee responseEmployee = restTemplate.postForObject(baseUrl, employee, Employee.class);
         assertEquals("SiYa", responseEmployee.getFirstName());
@@ -79,6 +83,9 @@ public class EmployeeControllerIntegrationTests {
     @DisplayName("Positive: Get Employee by Id")
     @Sql(statements = "insert into Employee(id, first_name, last_name, email) values(1, 'Jay', 'Long', 'long@gmail.com');\n", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void testFindEmployeeById() {
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("john","test123"));
+
         Employee responseEmployee = restTemplate.getForObject(baseUrl + "/{id}",
                 Employee.class, 1);
         assertAll(
@@ -93,6 +100,9 @@ public class EmployeeControllerIntegrationTests {
     @DisplayName("Positive: Update Employee with Id")
     @Sql(statements = "insert into Employee(id, first_name, last_name, email) values(2, 'May', 'Ling', 'ling@gmail.com');\n", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void testUpdateProduct() {
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("mary","test123"));
+
         Employee employee = new Employee("May", "Ling", "ling-a@gmail.com");
         employee.setId(2);
         restTemplate.put(baseUrl, employee, Employee.class);
@@ -116,6 +126,9 @@ public class EmployeeControllerIntegrationTests {
     @DisplayName("Positive: Delete Employee by Id")
     @Sql(statements = "insert into Employee(id, first_name, last_name, email) values(3, 'May', 'Ling', 'ling@gmail.com');\n", executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
     public void testDeleteEmployee() {
+        restTemplate.getInterceptors().add(
+                new BasicAuthenticationInterceptor("susan","test123"));
+
         assertEquals(1, employeeCount());
         restTemplate.delete(baseUrl + "/{employeeId}", 3);
         assertEquals(0, employeeCount());
