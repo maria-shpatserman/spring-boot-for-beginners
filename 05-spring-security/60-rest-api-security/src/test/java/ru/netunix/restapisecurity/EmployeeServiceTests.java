@@ -1,13 +1,13 @@
-package ru.netunix.crudeemployees;
+package ru.netunix.restapisecurity;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.netunix.crudeemployees.dao.EmployeeDAO;
-import ru.netunix.crudeemployees.entity.Employee;
-import ru.netunix.crudeemployees.service.EmployeeService;
+import ru.netunix.restapisecurity.dao.EmployeeDAO;
+import ru.netunix.restapisecurity.entity.Employee;
+import ru.netunix.restapisecurity.service.EmployeeService;
 
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
