@@ -1,16 +1,29 @@
 package ru.netunix.restapisecurity.dao;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Repository;
 import ru.netunix.restapisecurity.entity.Employee;
 
 import java.util.List;
 
 @Repository
+@Slf4j
 public class EmployeeDAOJpaImpl implements EmployeeDAO {
     private EntityManager entityManager;
+    @Value("${spring.profiles.active:}")
+    private String activeProfiles;
+
+    @PostConstruct
+    public void initProfile(){
+        for (String profileName : activeProfiles.split(",")) {
+            log.info("Currently active profile - {} ", profileName);
+        }
+    }
 
     @Autowired
     public EmployeeDAOJpaImpl(EntityManager entityManager) {
