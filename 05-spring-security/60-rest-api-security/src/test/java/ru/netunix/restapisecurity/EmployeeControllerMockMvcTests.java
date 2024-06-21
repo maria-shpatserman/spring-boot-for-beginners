@@ -31,8 +31,10 @@ public class EmployeeControllerMockMvcTests {
     MockMvc mockMvc;
     static MySQLContainer mySQLContainer = new MySQLContainer<>("mysql:latest");
 
+
     @DynamicPropertySource
     public static void configureProperties(DynamicPropertyRegistry registry) {
+        mySQLContainer.withInitScript("data.sql");
         registry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
         registry.add("spring.datasource.username",mySQLContainer::getUsername);
         registry.add("spring.datasource.password",mySQLContainer::getPassword);
@@ -43,6 +45,8 @@ public class EmployeeControllerMockMvcTests {
     EmployeeService employeeService;
     @BeforeAll
     static void beforeAll(){
+        mySQLContainer.withInitScript("initialize-mysql-container.sql");
+
         mySQLContainer.start();
     }
     @AfterAll
