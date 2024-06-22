@@ -1,0 +1,11 @@
+spring:
+    application:
+        name: rest-api-security
+    datasource:
+        password: springstudent
+        url: jdbc:mysql://localhost:3306/employee_directory
+        username: springstudent
+    security:
+        user:
+            name: scott
+            password: test123
