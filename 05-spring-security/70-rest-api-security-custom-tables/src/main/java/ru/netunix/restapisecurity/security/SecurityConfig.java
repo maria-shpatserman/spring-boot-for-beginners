@@ -17,8 +17,18 @@ public class SecurityConfig {
     //add support for JDBC. Take Users from db
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource){
+        JdbcUserDetailsManager jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+        //retrieve users by username
+        jdbcUserDetailsManager.setUsersByUsernameQuery(
+                "SELECT user_id, pw,active FROM members where user_id=? "
 
-        return new JdbcUserDetailsManager(dataSource);
+        );
+        //retrieve roles by user_id
+        jdbcUserDetailsManager.setAuthoritiesByUsernameQuery(
+                "SELECT user_id, role FROM roles  where user_id=?"
+        );
+
+        return jdbcUserDetailsManager;
     }
   /*  @Bean
     public InMemoryUserDetailsManager userDetailsManager() {

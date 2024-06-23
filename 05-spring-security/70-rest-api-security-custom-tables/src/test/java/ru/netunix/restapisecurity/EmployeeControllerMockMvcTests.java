@@ -34,7 +34,6 @@ public class EmployeeControllerMockMvcTests {
 
     @DynamicPropertySource
     public static void configureProperties(DynamicPropertyRegistry registry) {
-        mySQLContainer.withInitScript("data.sql");
         registry.add("spring.datasource.url",mySQLContainer::getJdbcUrl);
         registry.add("spring.datasource.username",mySQLContainer::getUsername);
         registry.add("spring.datasource.password",mySQLContainer::getPassword);
