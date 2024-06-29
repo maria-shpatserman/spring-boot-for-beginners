@@ -22,12 +22,15 @@ public class StudentController {
     @Value("${countries}")
     List<String> countries;
 
+    @Value("${languages}")
+    List<String> languages;
+
     @GetMapping("/showStudentForm")
     public String showForm(Model theModel) {
         Student student = new Student();
         theModel.addAttribute("student", student);
-        theModel.addAttribute("countries",countries);
-
+        theModel.addAttribute("countries", countries);
+        theModel.addAttribute("languages", languages);
         return "student-form";
 
     }
@@ -36,21 +39,9 @@ public class StudentController {
     public String processStudentForm(@ModelAttribute("student") Student theStudent) {
 
         log.info("{}", theStudent);
-        String input = "Test   reversed words   frame";
 
-        log.info("input {}", input);
-        log.info("result {}", reverseWords(input));
         return "student-confirmation";
     }
 
-    String reverseWords(String input) {
-        Set<String> keys = Set.copyOf(Arrays.asList(input.split(" ")));
 
-        String result = input;
-        for (String key : keys) {
-            StringBuilder reversed = new StringBuilder(key).reverse();
-            result = result.replace(key, reversed.toString());
-        }
-        return result;
-    }
 }
