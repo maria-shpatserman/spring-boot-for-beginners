@@ -31,6 +31,7 @@ public class StudentController {
         theModel.addAttribute("student", student);
         theModel.addAttribute("countries", countries);
         theModel.addAttribute("languages", languages);
+//        theModel.addAttribute("")
         return "student-form";
 
     }
