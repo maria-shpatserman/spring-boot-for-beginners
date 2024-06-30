@@ -13,7 +13,7 @@
     <br><br>
     Country:
     <select th:field="*{country}">
-      <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"/>
+        <option th:each="tempCountry : ${countries}" th:value="${tempCountry}" th:text="${tempCountry}"/>
 
     </select>
     <br><br>
@@ -24,13 +24,12 @@
            th:text="${tempLang}"/>
 
 
-
     <br><br>
     Favorite Operating Systems:
-    <input type="checkbox" th:field="*{favoriteSystems}" th:value="Linux">Linux</input>
-    <input type="checkbox" th:field="*{favoriteSystems}" th:value="'Microsoft Windows'">Microsoft Windows</input>
-    <input type="checkbox" th:field="*{favoriteSystems}" th:value="MacOs">MacOs</input>
-
+    <input type="checkbox" th:field="*{favoriteSystems}"
+           th:each="tempSystem: ${systems}"
+           th:value="${tempSystem}"
+           th:text="${tempSystem}"/>
     <br><br>
     <input type="submit" value="Submit"/>
 </form>
