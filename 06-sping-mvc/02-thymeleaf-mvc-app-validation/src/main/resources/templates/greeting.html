@@ -1,0 +1,17 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Greeting</title>
+    <link rel="stylesheet"
+          th:href="@{/css/styles.css}"
+    >
+</head>
+<body>
+<p  th:text="'Hello  ' + ${theStudentName} +'!' " class="funny"/>
+<p>Nice to meet you!</p>
+<p>Have a nice day!</p>
+<span th:text="${message}"/>
+
+</body>
+</html>
