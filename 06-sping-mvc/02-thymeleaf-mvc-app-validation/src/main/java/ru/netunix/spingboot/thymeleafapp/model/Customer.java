@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import ru.netunix.spingboot.thymeleafapp.annotations.PrefixCourseCode;
 
 @Data
 @NoArgsConstructor
@@ -23,4 +24,6 @@ public class Customer {
     private Integer freePasses;
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
     private String postalCode;
+    @PrefixCourseCode
+    private String courseCode;
 }
