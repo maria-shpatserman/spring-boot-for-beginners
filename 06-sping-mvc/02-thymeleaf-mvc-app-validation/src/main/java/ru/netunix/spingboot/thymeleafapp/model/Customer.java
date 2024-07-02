@@ -24,6 +24,6 @@ public class Customer {
     private Integer freePasses;
     @Pattern(regexp = "^[a-zA-Z0-9]{5}", message = "only 5 chars/digits")
     private String postalCode;
-    @PrefixCourseCode
+    @PrefixCourseCode(value = "Java", message = "must start with Java")
     private String courseCode;
 }
