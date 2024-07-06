@@ -1,11 +1,11 @@
-package ru.netunix.crudeemployees.handler;
+package ru.netunix.thymeleafemployees.handler;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import ru.netunix.crudeemployees.utils.EmployeeErrorResponse;
-import ru.netunix.crudeemployees.utils.EmployeeNotFoundException;
+import ru.netunix.thymeleafemployees.utils.EmployeeErrorResponse;
+import ru.netunix.thymeleafemployees.utils.EmployeeNotFoundException;
 
 @ControllerAdvice
 public class EmployeeExceptionHandler {

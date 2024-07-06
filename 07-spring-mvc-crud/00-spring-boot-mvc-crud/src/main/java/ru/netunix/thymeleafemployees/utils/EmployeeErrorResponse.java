@@ -1,4 +1,4 @@
-package ru.netunix.crudeemployees.utils;
+package ru.netunix.thymeleafemployees.utils;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

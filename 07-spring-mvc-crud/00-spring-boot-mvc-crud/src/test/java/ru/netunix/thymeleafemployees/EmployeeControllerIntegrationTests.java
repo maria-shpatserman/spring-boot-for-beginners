@@ -1,4 +1,4 @@
-package ru.netunix.crudeemployees;
+package ru.netunix.thymeleafemployees;
 
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.AfterEach;
@@ -12,7 +12,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.web.client.RestTemplate;
-import ru.netunix.crudeemployees.entity.Employee;
+import ru.netunix.thymeleafemployees.entity.Employee;
 
 import java.util.List;
 

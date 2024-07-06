@@ -1,4 +1,4 @@
-package ru.netunix.crudeemployees.utils;
+package ru.netunix.thymeleafemployees.utils;
 
 public class EmployeeNotFoundException extends RuntimeException{
 

@@ -1,4 +1,4 @@
-package ru.netunix.crudeemployees.entity;
+package ru.netunix.thymeleafemployees.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

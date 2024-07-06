@@ -1,10 +1,10 @@
-package ru.netunix.crudeemployees.dao;
+package ru.netunix.thymeleafemployees.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import ru.netunix.crudeemployees.entity.Employee;
+import ru.netunix.thymeleafemployees.entity.Employee;
 
 import java.util.List;
 

@@ -1,10 +1,10 @@
-package ru.netunix.crudeemployees.service;
+package ru.netunix.thymeleafemployees.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.netunix.crudeemployees.dao.EmployeeDAO;
-import ru.netunix.crudeemployees.entity.Employee;
+import ru.netunix.thymeleafemployees.dao.EmployeeDAO;
+import ru.netunix.thymeleafemployees.entity.Employee;
 
 import java.util.List;
 
