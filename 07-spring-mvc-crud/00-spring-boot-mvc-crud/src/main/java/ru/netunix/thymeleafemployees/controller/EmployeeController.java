@@ -23,7 +23,15 @@ public class EmployeeController {
     @GetMapping("/list")
     public String getAllEmployees(Model theModel) {
         List<Employee> employeeList = employeeService.findAll();
-        theModel.addAttribute("employeeList",employeeList);
-        return "list-employees";
+        theModel.addAttribute("employeeList", employeeList);
+        return "employees/list-employees";
+    }
+
+    @GetMapping("showFormForAdd")
+    public String addNewEmployee(Model theModel) {
+        //create model attribute to bind the form data
+        Employee employee = new Employee();
+        theModel.addAttribute("employee", employee);
+        return  "employees/form-add-employee";
     }
 }

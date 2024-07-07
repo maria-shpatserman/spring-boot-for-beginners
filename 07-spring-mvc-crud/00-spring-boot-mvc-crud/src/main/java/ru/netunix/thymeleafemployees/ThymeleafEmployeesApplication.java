@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 @Slf4j
-public class CrudeEmployeesApplication {
+public class ThymeleafEmployeesApplication {
 
 	public static void main(String[] args) {
 		log.info("Starting application...");
-		SpringApplication.run(CrudeEmployeesApplication.class, args);
+		SpringApplication.run(ThymeleafEmployeesApplication.class, args);
 	}
 
 }
