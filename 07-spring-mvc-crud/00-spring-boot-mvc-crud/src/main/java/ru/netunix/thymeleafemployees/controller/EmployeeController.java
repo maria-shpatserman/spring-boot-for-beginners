@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.netunix.thymeleafemployees.entity.Employee;
 import ru.netunix.thymeleafemployees.service.EmployeeService;
@@ -22,7 +24,7 @@ public class EmployeeController {
 
     @GetMapping("/list")
     public String getAllEmployees(Model theModel) {
-        List<Employee> employeeList = employeeService.findAll();
+        List<Employee> employeeList = employeeService.findAllByOrderByLastNameAsc();
         theModel.addAttribute("employeeList", employeeList);
         return "employees/list-employees";
     }
@@ -33,5 +35,13 @@ public class EmployeeController {
         Employee employee = new Employee();
         theModel.addAttribute("employee", employee);
         return  "employees/form-add-employee";
+    }
+    @PostMapping("/save")
+    public String saveNewEmployee(@ModelAttribute("employee") Employee theEmployee){
+        //save the employee
+        employeeService.save(theEmployee);
+        //use redirect to prevent duplicate submissions
+
+        return "redirect:/employees/list";
     }
 }

@@ -40,4 +40,9 @@ public class EmployeeServiceImpl implements EmployeeService {
     public void deleteById(int id) {
         employeeDAO.deleteById(id);
     }
+
+    @Override
+    public List<Employee> findAllByOrderByLastNameAsc() {
+        return employeeDAO.findAllByOrderByLastNameAsc();
+    }
 }

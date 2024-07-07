@@ -25,6 +25,13 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
     }
 
     @Override
+    public List<Employee> findAllByOrderByLastNameAsc() {
+        TypedQuery<Employee> theQuery = entityManager.createQuery("from Employee order by lastName ASC", Employee.class);
+
+        return theQuery.getResultList();
+    }
+
+    @Override
     public Employee findById(int id) {
         return entityManager.find(Employee.class, id);
     }
