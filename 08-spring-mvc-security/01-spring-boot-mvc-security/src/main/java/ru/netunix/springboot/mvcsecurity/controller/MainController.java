@@ -9,6 +9,14 @@ public class MainController {
     public String showHome() {
         return "home";
     }
+    @GetMapping("/leaders")
+    public String showLeadersPage(){
+        return "leaders-home";
+    }
+    @GetMapping("/systems")
+    public String showAdminsPage(){
+        return "admins-home";
+    }
 
 }
 
