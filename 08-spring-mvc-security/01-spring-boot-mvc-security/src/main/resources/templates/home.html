@@ -18,15 +18,19 @@
     <br><br>
     Role(s): <span sec:authentication="principal.authorities"></span>
 </p>
-<hr>
-<p>
-    <a th:href="@{/leaders}">Leadership Meeting</a>
-    (Only for Managers peeps)
-</p>
+
+<div sec:authorize="hasRole('MANAGER')">
+    <p>
+        <a th:href="@{/leaders}">Leadership Meeting</a>
+        (Only for Managers peeps)
+    </p>
+</div>
+<div sec:authorize="hasRole('ADMIN')">
 <p>
     <a th:href="@{/systems}">It System devs Meeting</a>
     (Only for Admins peeps)
 </p>
+</div>
 
 <hr>
 <!-- Add logout button-->
