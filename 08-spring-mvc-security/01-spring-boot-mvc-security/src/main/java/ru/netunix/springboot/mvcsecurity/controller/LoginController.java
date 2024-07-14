@@ -10,4 +10,8 @@ public class LoginController {
         return "fancy-login";
 
     }
+    @GetMapping("/access-denied")
+    public String accessDeniedPage(){
+        return "access-denied";
+    }
 }
