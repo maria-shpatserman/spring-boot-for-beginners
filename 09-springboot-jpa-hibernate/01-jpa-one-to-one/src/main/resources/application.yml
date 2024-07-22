@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: crudhibernate
+  datasource:
+    url: jdbc:mysql://localhost:3306/hb-01-one-to-one-uni
+    username: springstudent
+    password: springstudent
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: trace
+        orm:
+          jdbc:
+            bind: trace
+
