@@ -22,8 +22,23 @@ public class CrudhibernateApplication {
         return (arguments) -> {
 //			createInstructor(appDao );
 //            findInstructor(appDao);
-            deleteInstructor(appDao);
+//            deleteInstructor(appDao);
+//            findInstructorDetail(appDao);
+            deleteInstructorDetail(appDao);
         };
+
+    }
+
+    private void deleteInstructorDetail(AppDao appDao) {
+        int id =1;
+        appDao.deleteInstructorDetailById(id);
+    }
+
+    private void findInstructorDetail(AppDao appDao) {
+        InstructorDetail instructorDetail = appDao.findInstructorDetailById(1);
+        System.out.println("Instructor Detail = "+instructorDetail);
+        Instructor instructor = instructorDetail.getInstructor();
+        System.out.println("Instructor  = "+instructor);
 
     }
 
@@ -41,16 +56,17 @@ public class CrudhibernateApplication {
     }
 
     private void createInstructor(AppDao appDao) {
-//		Instructor instructor = new Instructor("Carl","Bravo","bravo@ya.ru");
-//		InstructorDetail instructorDetail = new InstructorDetail("http://netunix.ru","programming");
-//		instructor.setInstructorDetail(instructorDetail);
-
-        Instructor instructor = new Instructor("Lary", "Dowl", "dowl@ya.ru");
-        InstructorDetail instructorDetail = new InstructorDetail("http://yandex.ru", "development");
-        instructor.setInstructorDetail(instructorDetail);
-
+		Instructor instructor = new Instructor("Carl","Bravo","bravo@ya.ru");
+		InstructorDetail instructorDetail = new InstructorDetail("http://netunix.ru","programming");
+		instructor.setInstructorDetail(instructorDetail);
 
         appDao.save(instructor);
+        Instructor instructor2 = new Instructor("Lary", "Dowl", "dowl@ya.ru");
+        InstructorDetail instructorDetail2 = new InstructorDetail("http://yandex.ru", "development");
+        instructor2.setInstructorDetail(instructorDetail2);
+
+
+        appDao.save(instructor2);
     }
 
     public static void main(String[] args) {
