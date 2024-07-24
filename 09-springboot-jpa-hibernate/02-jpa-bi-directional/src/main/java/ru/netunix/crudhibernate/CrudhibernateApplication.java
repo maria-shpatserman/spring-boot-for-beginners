@@ -6,6 +6,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import ru.netunix.crudhibernate.dao.AppDao;
+import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
 
@@ -24,8 +25,23 @@ public class CrudhibernateApplication {
 //            findInstructor(appDao);
 //            deleteInstructor(appDao);
 //            findInstructorDetail(appDao);
-            deleteInstructorDetail(appDao);
+//            deleteInstructorDetail(appDao);
+            createInstructorWithCourses(appDao);
         };
+
+    }
+
+    private void createInstructorWithCourses(AppDao appDao) {
+        Instructor instructor2 = new Instructor("Susan", "Dowl", "dowl@ya.ru");
+        InstructorDetail instructorDetail2 = new InstructorDetail("http://yan.ru", "development");
+        instructor2.setInstructorDetail(instructorDetail2);
+        Course course = new Course("Java Spring");
+        Course course2 = new Course("Spring Boot");
+        instructor2.addNewCourse(course);
+        instructor2.addNewCourse(course2);
+
+
+        appDao.save(instructor2);
 
     }
 
