@@ -3,6 +3,7 @@ package ru.netunix.crudhibernate.entity;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,7 +35,9 @@ public class Instructor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
-    @OneToMany(mappedBy = "instructor", cascade = {CascadeType.PERSIST, CascadeType.MERGE,
+    @OneToMany(mappedBy = "instructor",
+            fetch = FetchType.LAZY,
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
             CascadeType.DETACH, CascadeType.REFRESH})
     private List<Course> courses;
 
@@ -50,5 +53,14 @@ public class Instructor {
         }
         courses.add(course);
         course.setInstructor(this);
+    }
+
+    @Override
+    public String toString() {
+        return "Instructor{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
