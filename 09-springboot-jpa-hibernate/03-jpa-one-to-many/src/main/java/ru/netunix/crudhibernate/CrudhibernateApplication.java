@@ -29,10 +29,18 @@ public class CrudhibernateApplication {
 //            deleteInstructorDetail(appDao);
 //                       createInstructorWithCourses(appDao);
 //            findInstructorWithCourses(appDao);
-            findCoursesForInstructor(appDao);
+//            findCoursesForInstructor(appDao);
+            findInstructorWithCoursesJoinFetch(appDao);
 
         };
 
+    }
+
+    private void findInstructorWithCoursesJoinFetch(AppDao appDao) {
+        int id =1;
+        Instructor instructor = appDao.findInstructorByIdJoinFetch(id);
+        System.out.println("instructor = "+instructor);
+        System.out.println("instructor's courses= "+instructor.getCourses());
     }
 
     private void deleteInstructorDetail(AppDao appDao) {
