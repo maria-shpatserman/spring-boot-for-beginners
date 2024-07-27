@@ -1,20 +1,12 @@
 package ru.netunix.crudhibernate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.transaction.annotation.Transactional;
 import ru.netunix.crudhibernate.dao.AppDao;
-import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
-
-import java.sql.SQLOutput;
-import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 @SpringBootApplication
 public class CrudhibernateApplication {
@@ -27,52 +19,21 @@ public class CrudhibernateApplication {
 //            findInstructor(appDao);
 //            deleteInstructor(appDao);
 //            findInstructorDetail(appDao);
-//            deleteInstructorDetail(appDao);
-//            createInstructorWithCourses(appDao);
-//            findInstructorWithCourses(appDao);
-            findCoursesForInstructor(appDao);
+            deleteInstructorDetail(appDao);
+
         };
 
     }
 
-    private void findCoursesForInstructor(AppDao appDao) {
-        int id = 2;
-        Instructor instructor = appDao.findInstructorById(id);
-        System.out.println("instructor " + instructor);
-        //find courses
-        List<Course> courses = appDao.findCoursesByInstructorId(id);
-        instructor.setCourses(courses);
-        System.out.println("the associated course: " + instructor.getCourses());
-    }
 
-    private void findInstructorWithCourses(AppDao appDao) {
-        int id = 2;
-        Instructor instructor = appDao.findInstructorById(id);
-        System.out.println("instructor " + instructor);
-        System.out.println("the associated course: " + instructor.getCourses());
-    }
-
-    private void createInstructorWithCourses(AppDao appDao) {
-        Instructor instructor2 = new Instructor("Susan", "Dowl", "dowl@ya.ru");
-        InstructorDetail instructorDetail2 = new InstructorDetail("http://yan.ru", "development");
-        instructor2.setInstructorDetail(instructorDetail2);
-        Course course = new Course("Java Spring");
-        Course course2 = new Course("Spring Boot");
-        instructor2.addNewCourse(course);
-        instructor2.addNewCourse(course2);
-
-
-        appDao.save(instructor2);
-
-    }
 
     private void deleteInstructorDetail(AppDao appDao) {
-        int id = 1;
+        int id = 3;
         appDao.deleteInstructorDetailById(id);
     }
 
     private void findInstructorDetail(AppDao appDao) {
-        InstructorDetail instructorDetail = appDao.findInstructorDetailById(1);
+        InstructorDetail instructorDetail = appDao.findInstructorDetailById(3);
         System.out.println("Instructor Detail = " + instructorDetail);
         Instructor instructor = instructorDetail.getInstructor();
         System.out.println("Instructor  = " + instructor);

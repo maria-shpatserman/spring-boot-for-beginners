@@ -35,25 +35,15 @@ public class Instructor {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "instructor_detail_id")
     private InstructorDetail instructorDetail;
-    @OneToMany(mappedBy = "instructor",
-            fetch = FetchType.LAZY,
-            cascade = {CascadeType.PERSIST, CascadeType.MERGE,
-            CascadeType.DETACH, CascadeType.REFRESH})
-    private List<Course> courses;
+
 
     public Instructor(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
-    //add convenience methods for bi-directional relationship
-    public void addNewCourse(Course course){
-        if(courses == null) {
-            courses = new ArrayList<>();
-        }
-        courses.add(course);
-        course.setInstructor(this);
-    }
+
+
 
     @Override
     public String toString() {

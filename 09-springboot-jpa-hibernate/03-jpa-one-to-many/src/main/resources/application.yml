@@ -1,8 +1,8 @@
 spring:
   application:
-    name: crudhibernate
+    name: 03-crudhibernate
   datasource:
-    url: jdbc:mysql://localhost:3306/hb-01-one-to-one-uni
+    url: jdbc:mysql://localhost:3306/hb-03-one-to-many
     username: springstudent
     password: springstudent
 
