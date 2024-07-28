@@ -1,6 +1,5 @@
 package ru.netunix.crudhibernate;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,10 +9,7 @@ import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
 
-import java.sql.SQLOutput;
 import java.util.List;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
 
 @SpringBootApplication
 public class CrudhibernateApplication {
@@ -30,29 +26,46 @@ public class CrudhibernateApplication {
 //                       createInstructorWithCourses(appDao);
 //            findInstructorWithCourses(appDao);
 //            findCoursesForInstructor(appDao);
-            findInstructorWithCoursesJoinFetch(appDao);
+//            findInstructorWithCoursesJoinFetch(appDao);
+//            updateExistingInstructor(appDao);
+            updateCourse(appDao);
 
         };
 
     }
 
+    private void updateCourse(AppDao appDao) {
+        int id = 10;
+        Course course = appDao.findCourseById(id);
+        course.setTitle("Java EE 6");
+        appDao.update(course);
+    }
+
+    private void updateExistingInstructor(AppDao appDao) {
+        int id = 1;
+        Instructor instructor = appDao.findInstructorById(id);
+        instructor.setFirstName("Boba");
+        appDao.update(instructor);
+
+    }
+
     private void findInstructorWithCoursesJoinFetch(AppDao appDao) {
-        int id =1;
+        int id = 1;
         Instructor instructor = appDao.findInstructorByIdJoinFetch(id);
-        System.out.println("instructor = "+instructor);
-        System.out.println("instructor's courses= "+instructor.getCourses());
+        System.out.println("instructor = " + instructor);
+        System.out.println("instructor's courses= " + instructor.getCourses());
     }
 
     private void deleteInstructorDetail(AppDao appDao) {
-        int id =1;
+        int id = 1;
         appDao.deleteInstructorDetailById(id);
     }
 
     private void findInstructorDetail(AppDao appDao) {
         InstructorDetail instructorDetail = appDao.findInstructorDetailById(1);
-        System.out.println("Instructor Detail = "+instructorDetail);
+        System.out.println("Instructor Detail = " + instructorDetail);
         Instructor instructor = instructorDetail.getInstructor();
-        System.out.println("Instructor  = "+instructor);
+        System.out.println("Instructor  = " + instructor);
 
     }
 
@@ -70,9 +83,9 @@ public class CrudhibernateApplication {
     }
 
     private void createInstructor(AppDao appDao) {
-		Instructor instructor = new Instructor("Carl","Bravo","bravo@ya.ru");
-		InstructorDetail instructorDetail = new InstructorDetail("http://netunix.ru","programming");
-		instructor.setInstructorDetail(instructorDetail);
+        Instructor instructor = new Instructor("Carl", "Bravo", "bravo@ya.ru");
+        InstructorDetail instructorDetail = new InstructorDetail("http://netunix.ru", "programming");
+        instructor.setInstructorDetail(instructorDetail);
 
         appDao.save(instructor);
         Instructor instructor2 = new Instructor("Lary", "Dowl", "dowl@ya.ru");
@@ -82,6 +95,7 @@ public class CrudhibernateApplication {
 
         appDao.save(instructor2);
     }
+
     private void findCoursesForInstructor(AppDao appDao) {
         int id = 2;
         Instructor instructor = appDao.findInstructorById(id);
