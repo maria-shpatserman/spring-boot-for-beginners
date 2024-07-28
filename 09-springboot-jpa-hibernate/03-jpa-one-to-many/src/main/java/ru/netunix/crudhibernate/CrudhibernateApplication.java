@@ -29,10 +29,16 @@ public class CrudhibernateApplication {
 //            findInstructorWithCoursesJoinFetch(appDao);
 //            updateExistingInstructor(appDao);
 //            updateCourse(appDao);
-            deleteInstructor(appDao);
+//            deleteInstructor(appDao);
+            deleteCourse(appDao);
 
         };
 
+    }
+
+    private void deleteCourse(AppDao appDao) {
+        int id = 10;
+        appDao.deleteCourseById(10);
     }
 
     private void updateCourse(AppDao appDao) {
@@ -115,11 +121,11 @@ public class CrudhibernateApplication {
     }
 
     private void createInstructorWithCourses(AppDao appDao) {
-        Instructor instructor2 = new Instructor("Susan", "Dowl", "dowl@ya.ru");
+        Instructor instructor2 = new Instructor("Susan", "Bowl", "dowl@ya.ru");
         InstructorDetail instructorDetail2 = new InstructorDetail("http://yan.ru", "development");
         instructor2.setInstructorDetail(instructorDetail2);
-        Course course = new Course("Java Spring");
-        Course course2 = new Course("Spring Boot");
+        Course course = new Course("Java Spring 10");
+        Course course2 = new Course("Spring Boot 3");
         instructor2.addNewCourse(course);
         instructor2.addNewCourse(course2);
 
