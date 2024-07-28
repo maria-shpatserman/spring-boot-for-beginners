@@ -20,7 +20,7 @@ public class CrudhibernateApplication {
         return (arguments) -> {
 //			createInstructor(appDao );
 //            findInstructor(appDao);
-//            deleteInstructor(appDao);
+//
 //            findInstructorDetail(appDao);
 //            deleteInstructorDetail(appDao);
 //                       createInstructorWithCourses(appDao);
@@ -28,7 +28,8 @@ public class CrudhibernateApplication {
 //            findCoursesForInstructor(appDao);
 //            findInstructorWithCoursesJoinFetch(appDao);
 //            updateExistingInstructor(appDao);
-            updateCourse(appDao);
+//            updateCourse(appDao);
+            deleteInstructor(appDao);
 
         };
 
@@ -70,7 +71,7 @@ public class CrudhibernateApplication {
     }
 
     private void deleteInstructor(AppDao appDao) {
-        int id = 2;
+        int id = 1;
         System.out.println("Deleting instructor wit id = " + id);
         appDao.deleteInstructorById(id);
     }

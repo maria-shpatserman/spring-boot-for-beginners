@@ -12,12 +12,14 @@ import ru.netunix.crudhibernate.entity.InstructorDetail;
 import java.util.List;
 
 @Repository
-public class AppDaoImpl implements AppDao{
+public class AppDaoImpl implements AppDao {
     private EntityManager entityManager;
+
     @Autowired
-    public AppDaoImpl(EntityManager entityManager){
+    public AppDaoImpl(EntityManager entityManager) {
         this.entityManager = entityManager;
     }
+
     @Override
     @Transactional
     public void save(Instructor instructor) {
@@ -33,20 +35,23 @@ public class AppDaoImpl implements AppDao{
 
     @Override
     public Instructor findInstructorById(int id) {
-        return entityManager.find(Instructor.class,id);
+        return entityManager.find(Instructor.class, id);
     }
 
     @Override
     @Transactional
     public void deleteInstructorById(int id) {
-        Instructor instructor = entityManager.find(Instructor.class,id);
+        Instructor instructor = entityManager.find(Instructor.class, id);
+        List<Course> list = findCoursesByInstructorId(id);
+        list.forEach(c->c.setInstructor(null));
+
         entityManager.remove(instructor);
 
     }
 
     @Override
     public InstructorDetail findInstructorDetailById(int id) {
-       return  entityManager.find(InstructorDetail.class,id);
+        return entityManager.find(InstructorDetail.class, id);
     }
 
     @Override
@@ -70,9 +75,9 @@ public class AppDaoImpl implements AppDao{
     public Instructor findInstructorByIdJoinFetch(int id) {
         TypedQuery<Instructor> query = entityManager.createQuery(
                 " select i from Instructor i "
-                + " JOIN FETCH i.courses "
-                + " JOIN FETCH i.instructorDetail "
-                + " where i.id = :data", Instructor.class);
+                        + " JOIN FETCH i.courses "
+                        + " JOIN FETCH i.instructorDetail "
+                        + " where i.id = :data", Instructor.class);
         query.setParameter("data", id);
         Instructor instructor = query.getSingleResult();
         return instructor;
@@ -88,6 +93,6 @@ public class AppDaoImpl implements AppDao{
 
     @Override
     public Course findCourseById(int id) {
-       return  entityManager.find(Course.class,id);
+        return entityManager.find(Course.class, id);
     }
 }
