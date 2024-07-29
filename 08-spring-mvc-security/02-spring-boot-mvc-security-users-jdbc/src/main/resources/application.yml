@@ -1,0 +1,13 @@
+spring:
+    application:
+        name: mvcsecurity
+    datasource:
+        password: springstudent
+        url: jdbc:mysql://localhost:3306/employee_directory
+        username: springstudent
+logging:
+    level:
+        org:
+            springframework:
+                jdbc:
+                    core: TRACE
