@@ -8,6 +8,7 @@ import ru.netunix.crudhibernate.dao.AppDao;
 import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
+import ru.netunix.crudhibernate.entity.Review;
 
 import java.util.List;
 
@@ -18,10 +19,32 @@ public class CrudhibernateApplication {
     public CommandLineRunner commandLineRunner(AppDao appDao) throws Exception {
 
         return (arguments) -> {
-//
-
+//            createCourseAndReviews(appDao);
+//            retrieveCourseAndReviews(appDao);
+            deleteCourseAndReviews(appDao);
         };
 
+    }
+
+    private void deleteCourseAndReviews(AppDao appDao) {
+        int id =10;
+        appDao.deleteCourseById(10);
+    }
+
+    private void retrieveCourseAndReviews(AppDao appDao) {
+        int id = 10;
+        Course course = appDao.findCourseAndReviewsByCourseId(id);
+        System.out.println(course);
+        System.out.println(course.getReviews());
+
+    }
+
+    private void createCourseAndReviews(AppDao appDao) {
+        Course course = new Course("MS Office 2010");
+        course.addReview(new Review("Very old course"));
+        course.addReview(new Review("Out-dated course"));
+        course.addReview(new Review("Normal for elderly peeps"));
+        appDao.save(course);
     }
 
     private void deleteCourse(AppDao appDao) {
