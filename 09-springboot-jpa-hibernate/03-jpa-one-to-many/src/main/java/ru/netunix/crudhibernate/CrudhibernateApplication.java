@@ -18,19 +18,7 @@ public class CrudhibernateApplication {
     public CommandLineRunner commandLineRunner(AppDao appDao) throws Exception {
 
         return (arguments) -> {
-//			createInstructor(appDao );
-//            findInstructor(appDao);
 //
-//            findInstructorDetail(appDao);
-//            deleteInstructorDetail(appDao);
-//                       createInstructorWithCourses(appDao);
-//            findInstructorWithCourses(appDao);
-//            findCoursesForInstructor(appDao);
-//            findInstructorWithCoursesJoinFetch(appDao);
-//            updateExistingInstructor(appDao);
-//            updateCourse(appDao);
-//            deleteInstructor(appDao);
-            deleteCourse(appDao);
 
         };
 
