@@ -9,6 +9,7 @@ import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
 import ru.netunix.crudhibernate.entity.Review;
+import ru.netunix.crudhibernate.entity.Student;
 
 import java.util.List;
 
@@ -21,13 +22,34 @@ public class CrudhibernateApplication {
         return (arguments) -> {
 //            createCourseAndReviews(appDao);
 //            retrieveCourseAndReviews(appDao);
-            deleteCourseAndReviews(appDao);
+//            deleteCourseAndReviews(appDao);
+//            createCourseAndStudents(appDao);
+            findCourseAndStudents(appDao);
+
         };
 
     }
 
+    private void findCourseAndStudents(AppDao appDao) {
+        int id = 10;
+        Course course = appDao.findCourseAndStudentsByCourseId(id);
+        System.out.println(course);
+        System.out.println(course.getStudents());
+    }
+
+    private void createCourseAndStudents(AppDao appDao) {
+        Course course = new Course("Java 17");
+        Student student1 = new Student("Dow", "Packman", "dowl@gamil.com");
+        Student student2 = new Student("Bowl", "Danny", "danny@gamil.com");
+        Student student3 = new Student("Susan", "Ferry", "ferry@gamil.com");
+        course.addStudent(student1);
+        course.addStudent(student2);
+        course.addStudent(student3);
+        appDao.save(course);
+    }
+
     private void deleteCourseAndReviews(AppDao appDao) {
-        int id =10;
+        int id = 10;
         appDao.deleteCourseById(10);
     }
 
