@@ -4,6 +4,7 @@ import org.springframework.stereotype.Repository;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
+import ru.netunix.crudhibernate.entity.Student;
 
 import java.util.List;
 
@@ -24,4 +25,8 @@ public interface AppDao {
     void deleteCourseById(int id);
     void save (Course course);
     Course findCourseAndReviewsByCourseId(int id);
+    Course findCourseAndStudentsByCourseId(int id);
+    Student findStudentAndCoursesByStudentId(int id);
+    void update(Student student);
+    void deleteStudentById(int id);
 }

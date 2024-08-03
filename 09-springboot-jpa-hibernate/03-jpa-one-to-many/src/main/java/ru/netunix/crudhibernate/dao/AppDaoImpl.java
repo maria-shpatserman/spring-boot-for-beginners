@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.netunix.crudhibernate.entity.Course;
 import ru.netunix.crudhibernate.entity.Instructor;
 import ru.netunix.crudhibernate.entity.InstructorDetail;
+import ru.netunix.crudhibernate.entity.Student;
 
 import java.util.List;
 
@@ -118,5 +119,41 @@ public class AppDaoImpl implements AppDao {
                         + " where i.id = :data", Course.class);
         query.setParameter("data", id);
         return query.getSingleResult();
+    }
+
+    @Override
+    public Course findCourseAndStudentsByCourseId(int id) {
+        TypedQuery<Course> query = entityManager.createQuery(
+                " select i from Course i "
+                        + " JOIN FETCH i.students "
+                        + " where i.id = :data", Course.class);
+        query.setParameter("data", id);
+        return query.getSingleResult();
+
+    }
+
+    @Override
+    public Student findStudentAndCoursesByStudentId(int id) {
+        TypedQuery<Student> query = entityManager.createQuery(
+                " select i from Student i "
+                        + " JOIN FETCH i.courses "
+                        + " where i.id = :data", Student.class);
+        query.setParameter("data", id);
+        return query.getSingleResult();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student student) {
+        entityManager.merge(student);
+
+    }
+
+    @Override
+    @Transactional
+    public void deleteStudentById(int id) {
+        Student student = findStudentAndCoursesByStudentId(id);
+        entityManager.remove(student);
+
     }
 }
