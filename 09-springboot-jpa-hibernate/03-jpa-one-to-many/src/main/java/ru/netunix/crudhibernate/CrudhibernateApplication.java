@@ -26,13 +26,22 @@ public class CrudhibernateApplication {
 //            createCourseAndStudents(appDao);
 //            findCourseAndStudents(appDao);
 //            findStudentAndCourses(appDao);
-            addMoreCoursesForStudent(appDao);
+//            addMoreCoursesForStudent(appDao);
+//            deleteCourse(appDao);
+            deleteStudent(appDao);
+
         };
 
     }
 
-    private void addMoreCoursesForStudent(AppDao appDao) {
+    private void deleteStudent(AppDao appDao) {
         int id =2;
+        appDao.deleteStudentById(id);
+
+    }
+
+    private void addMoreCoursesForStudent(AppDao appDao) {
+        int id = 2;
         Student student = appDao.findStudentAndCoursesByStudentId(id);
         Course course1 = new Course("Spring Boot 3");
         Course course2 = new Course("Spring Boot 2.6");
