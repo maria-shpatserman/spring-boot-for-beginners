@@ -24,10 +24,30 @@ public class CrudhibernateApplication {
 //            retrieveCourseAndReviews(appDao);
 //            deleteCourseAndReviews(appDao);
 //            createCourseAndStudents(appDao);
-            findCourseAndStudents(appDao);
-
+//            findCourseAndStudents(appDao);
+//            findStudentAndCourses(appDao);
+            addMoreCoursesForStudent(appDao);
         };
 
+    }
+
+    private void addMoreCoursesForStudent(AppDao appDao) {
+        int id =2;
+        Student student = appDao.findStudentAndCoursesByStudentId(id);
+        Course course1 = new Course("Spring Boot 3");
+        Course course2 = new Course("Spring Boot 2.6");
+        Course course3 = new Course("Kubernetis k8s");
+        student.addCourse(course1);
+        student.addCourse(course2);
+        student.addCourse(course3);
+        appDao.update(student);
+    }
+
+    private void findStudentAndCourses(AppDao appDao) {
+        int id = 2;
+        Student student = appDao.findStudentAndCoursesByStudentId(id);
+        System.out.println(student);
+        System.out.println(student.getCourses());
     }
 
     private void findCourseAndStudents(AppDao appDao) {
