@@ -5,11 +5,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @Slf4j
-public class MembershipDaoImpl implements MembershipDao{
+public class MembershipDaoImpl implements MembershipDao {
 
 
     @Override
-    public void addAccount() {
+    public boolean addAdditionalAccount() {
         System.out.println(getClass() + " Membership doing job : adding an account");
+        return true;
     }
 }

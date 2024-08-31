@@ -22,7 +22,7 @@ public class AopspringApplication {
 }
 
 	private void demoTheBeforeAdvice2(MembershipDao membershipDao) {
-		membershipDao.addAccount();
+		membershipDao.addAdditionalAccount();
 	}
 
 	private void demoTheBeforeAdvice(AccountDao accountDao) {

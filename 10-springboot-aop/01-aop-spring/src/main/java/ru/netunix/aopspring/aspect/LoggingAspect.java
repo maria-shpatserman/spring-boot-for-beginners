@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class LoggingAspect {
-    @Before("execution(public void add*())")
+    @Before("execution(void add*())")
     public void beforeAddAccountAdvice(){
         System.out.println("=====>>>>> Executing @Before advice on addAccount()");
 
