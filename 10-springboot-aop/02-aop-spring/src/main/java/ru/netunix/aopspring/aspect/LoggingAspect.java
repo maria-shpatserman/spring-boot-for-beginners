@@ -17,8 +17,13 @@ public class LoggingAspect {
     }
     @Before("forDaoPackage()")
     public void beforeAddAccountAdvice(){
-        System.out.println("=====>>>>> Executing @Before advice on any method  no params in our package");
+        System.out.println("=====>>>>> Executing @Before advice on any method with any params");
 
     }
+    @Before("forDaoPackage()")
+    public void apiAnalytics(){
+        System.out.println("=====>>>>> Executing @Before advice  - API analytics");
 
+
+    }
 }
