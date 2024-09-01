@@ -9,16 +9,16 @@ import org.springframework.stereotype.Component;
 @Component
 @Slf4j
 public class LoggingAspect {
-    //strict by return type and no params
-    @Before("execution(void add*())")
+    //strict by return type  strcit by packege name any class any method
+    @Before("execution(void ru.netunix.aopspring.dao.*.*())")
     public void beforeAddAccountAdvice(){
-        System.out.println("=====>>>>> Executing @Before advice on addAccount()");
+        System.out.println("=====>>>>> Executing @Before advice on any method  no params in our package");
 
     }
     //any parameter
-    @Before("execution(* add*(..))")
-    public void beforeAddAccountAdviceWithParam(){
-        System.out.println("=====>>>>> Executing @Before advice on * add*(Account) - with parameter");
-
-    }
+//    @Before("execution(* ru.netunix..add*(..))")
+//    public void beforeAddAccountAdviceWithParam(){
+//        System.out.println("=====>>>>> Executing @Before advice on * add*(Account) - with parameter");
+//
+//    }
 }
