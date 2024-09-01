@@ -34,7 +34,7 @@ public class AopspringApplication {
     }
 
     private void demoTheBeforeAdvice3(AccountDao accountDao, Account account) {
-        accountDao.addAccount(account);
+        accountDao.addAccount(account,true);
     }
 
 

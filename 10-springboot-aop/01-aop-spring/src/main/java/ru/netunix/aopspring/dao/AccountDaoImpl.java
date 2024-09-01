@@ -6,7 +6,7 @@ import ru.netunix.aopspring.entity.Account;
 
 @Repository
 @Slf4j
-public class AccountDaoImpl implements AccountDao{
+public class AccountDaoImpl implements AccountDao {
     @Override
     public void addAccount() {
         System.out.println(getClass() + " Doing job : adding an account");
@@ -14,7 +14,8 @@ public class AccountDaoImpl implements AccountDao{
     }
 
     @Override
-    public void addAccount(Account account) {
-        System.out.println(getClass() + " Doing job : adding an account "+account);
+    public void addAccount(Account account, boolean vipFlag) {
+        System.out.println(getClass() + " Doing job : adding an account " + account
+                + " with vipFlag = " + vipFlag);
     }
 }
