@@ -19,12 +19,12 @@ public class AopspringApplication {
     public CommandLineRunner commandLineRunner(AccountDao accountDao, MembershipDao membershipDao) {
         return runner -> {
             demoTheBeforeAdvice(accountDao);
-            demoTheBeforeAdvice2(membershipDao);
-            Account account = new Account();
-            account.setAmount(500);
-            account.setName("Mariia");
-            demoTheBeforeAdvice3(accountDao, account);
-            demoTheBeforeAdvice4(membershipDao, account);
+//            demoTheBeforeAdvice2(membershipDao);
+//            Account account = new Account();
+//            account.setAmount(500);
+//            account.setName("Mariia");
+//            demoTheBeforeAdvice3(accountDao, account);
+//            demoTheBeforeAdvice4(membershipDao, account);
 
         };
     }
@@ -44,5 +44,9 @@ public class AopspringApplication {
 
     private void demoTheBeforeAdvice(AccountDao accountDao) {
         accountDao.addAccount();
+        accountDao.setName("Name");
+        accountDao.setServiceCode("ServiceCode");
+        accountDao.getName();
+        accountDao.getServiceCode();
     }
 }

@@ -15,12 +15,24 @@ public class LoggingAspect {
     private void forDaoPackage(){
 
     }
+    @Pointcut("execution(* ru.netunix.aopspring.dao.*.set*(..))")
+    private void daoSetter(){
+
+    }
+    @Pointcut("execution(* ru.netunix.aopspring.dao.*.get*(..))")
+    private void daoGetter(){
+
+    }
+    @Pointcut("forDaoPackage() && !(daoGetter() || daoSetter())")
+    private void forDaoPackageNoGettersNoSetters(){
+
+    }
     @Before("forDaoPackage()")
     public void beforeAddAccountAdvice(){
         System.out.println("=====>>>>> Executing @Before advice on any method with any params");
 
     }
-    @Before("forDaoPackage()")
+    @Before("forDaoPackageNoGettersNoSetters()")
     public void apiAnalytics(){
         System.out.println("=====>>>>> Executing @Before advice  - API analytics");
 
