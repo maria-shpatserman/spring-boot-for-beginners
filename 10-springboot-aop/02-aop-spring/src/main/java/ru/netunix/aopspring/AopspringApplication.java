@@ -48,5 +48,7 @@ public class AopspringApplication {
         accountDao.setServiceCode("ServiceCode");
         accountDao.getName();
         accountDao.getServiceCode();
+        accountDao.addAccount(new Account(),true);
+
     }
 }
