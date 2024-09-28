@@ -4,11 +4,25 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import ru.netunix.aopspring.entity.Account;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Repository
 @Slf4j
 public class AccountDaoImpl implements AccountDao {
     private String name;
     private String serviceCode;
+
+    @Override
+    public List<Account> findAccounts() {
+        List<Account> myAccounts = new ArrayList<>();
+        myAccounts.add(new Account("Maria",500));
+        myAccounts.add(new Account("Bob",15000));
+        myAccounts.add(new Account("Bao",75000));
+
+        return myAccounts;
+    }
+
     @Override
     public void addAccount() {
         System.out.println(getClass() + " Doing job : adding an account");

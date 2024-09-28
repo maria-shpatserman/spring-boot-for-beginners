@@ -2,6 +2,8 @@ package ru.netunix.aopspring.dao;
 
 import ru.netunix.aopspring.entity.Account;
 
+import java.util.List;
+
 public interface AccountDao {
     void addAccount();
 
@@ -11,4 +13,5 @@ public interface AccountDao {
     void setServiceCode(String serviceCode);
     String getName();
     String getServiceCode();
+    List<Account> findAccounts();
 }

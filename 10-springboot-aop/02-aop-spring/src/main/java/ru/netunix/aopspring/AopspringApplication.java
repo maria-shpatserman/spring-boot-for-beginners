@@ -8,6 +8,8 @@ import ru.netunix.aopspring.dao.AccountDao;
 import ru.netunix.aopspring.dao.MembershipDao;
 import ru.netunix.aopspring.entity.Account;
 
+import java.util.List;
+
 @SpringBootApplication
 public class AopspringApplication {
 
@@ -18,7 +20,8 @@ public class AopspringApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AccountDao accountDao, MembershipDao membershipDao) {
         return runner -> {
-            demoTheBeforeAdvice(accountDao);
+            demoTheAfterFindAccountsAdvice(accountDao);
+//            demoTheBeforeAdvice(accountDao);
 //            demoTheBeforeAdvice2(membershipDao);
 //            Account account = new Account();
 //            account.setAmount(500);
@@ -27,6 +30,12 @@ public class AopspringApplication {
 //            demoTheBeforeAdvice4(membershipDao, account);
 
         };
+    }
+
+    private void demoTheAfterFindAccountsAdvice(AccountDao accountDao) {
+        List<Account> accounts = accountDao.findAccounts();
+        System.out.println("\n\tMain program demoTheAfterFindAccountsAdvice()");
+        System.out.println("Raw accounts "+accounts);
     }
 
     private void demoTheBeforeAdvice4(MembershipDao membershipDao, Account account) {
