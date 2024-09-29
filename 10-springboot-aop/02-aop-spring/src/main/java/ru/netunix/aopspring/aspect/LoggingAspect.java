@@ -26,7 +26,13 @@ public class LoggingAspect {
         String methodName = joinPoint.getSignature().toShortString();
         System.out.println("=====>>>>> Executing @AfterReturning advice after " + methodName);
         System.out.println("=====>>>>> result is " + result);
+        //let's post-process data
+        convertNamesToUpperCase(result);
 
+    }
+
+    private void convertNamesToUpperCase(List<Account> result) {
+        result.stream().forEach(s->s.setName(s.getName().toUpperCase()));
     }
 
     @Before("ru.netunix.aopspring.aspect.AopPointcuts.forDaoPackageNoGettersNoSetters()")
