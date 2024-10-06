@@ -3,6 +3,7 @@ package ru.netunix.aopspring.aspect;
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
+import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -29,6 +30,15 @@ public class LoggingAspect {
         //let's post-process data
         convertNamesToUpperCase(result);
 
+    }
+    @AfterThrowing(
+            pointcut = "execution(* ru.netunix.aopspring.dao.AccountDao.findBooks(..))",
+            throwing = "theException"
+    )
+    public void afterThrowingExceptionFindAccountsAdvice(JoinPoint joinPoint, Throwable theException){
+        String methodName = joinPoint.getSignature().toShortString();
+        System.out.println("=====>>>>> Executing @AfterThrowing advice after " + methodName);
+        System.out.println("=====>>>>> theException is " + theException.toString());
     }
 
     private void convertNamesToUpperCase(List<Account> result) {

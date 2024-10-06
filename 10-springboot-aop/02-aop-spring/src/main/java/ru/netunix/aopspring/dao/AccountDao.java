@@ -13,5 +13,5 @@ public interface AccountDao {
     void setServiceCode(String serviceCode);
     String getName();
     String getServiceCode();
-    List<Account> findAccounts();
+    List<Account> findAccounts() throws Exception;
 }

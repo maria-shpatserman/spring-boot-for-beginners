@@ -20,7 +20,8 @@ public class AopspringApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AccountDao accountDao, MembershipDao membershipDao) {
         return runner -> {
-            demoTheAfterFindAccountsAdvice(accountDao);
+            demoTheAfterThrowingFindAccountsAdvice(accountDao);
+//            demoTheAfterFindAccountsAdvice(accountDao);
 //            demoTheBeforeAdvice(accountDao);
 //            demoTheBeforeAdvice2(membershipDao);
 //            Account account = new Account();
@@ -32,7 +33,16 @@ public class AopspringApplication {
         };
     }
 
-    private void demoTheAfterFindAccountsAdvice(AccountDao accountDao) {
+    private void demoTheAfterThrowingFindAccountsAdvice(AccountDao accountDao) {
+
+        try {
+            List<Account> accounts = accountDao.findAccounts();
+        } catch (Exception e) {
+            System.out.println("The Exception "+e.getMessage() +" happened");
+        }
+    }
+
+    private void demoTheAfterFindAccountsAdvice(AccountDao accountDao) throws Exception {
         List<Account> accounts = accountDao.findAccounts();
         System.out.println("\n\tMain program demoTheAfterFindAccountsAdvice()");
         System.out.println("Raw accounts "+accounts);
