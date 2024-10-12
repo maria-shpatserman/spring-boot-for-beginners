@@ -19,7 +19,7 @@ public class AccountDaoImpl implements AccountDao {
         myAccounts.add(new Account("Maria",500));
         myAccounts.add(new Account("Bob",15000));
         myAccounts.add(new Account("Bao",75000));
-        if(myAccounts.size()>1) throw new Exception("Demo exception");
+        if(myAccounts.size()>10) throw new Exception("Demo exception");
 
         return myAccounts;
     }

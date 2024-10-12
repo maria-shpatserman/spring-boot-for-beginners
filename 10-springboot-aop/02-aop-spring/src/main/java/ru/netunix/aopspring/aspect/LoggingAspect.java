@@ -2,11 +2,11 @@ package ru.netunix.aopspring.aspect;
 
 import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
-import org.aspectj.lang.annotation.Pointcut;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -19,6 +19,13 @@ import java.util.List;
 @Slf4j
 @Order(2)
 public class LoggingAspect {
+    @After("execution(* ru.netunix.aopspring.dao.AccountDao.findAccounts(..))")
+    public void afterFinallyFindAccountAdvice(JoinPoint theJoinPoint){
+        String methodName = theJoinPoint.getSignature().toShortString();
+        System.out.println("=====>>>>> Executing @After (finally) advice after " + methodName);
+
+
+    }
     @AfterReturning(
             pointcut = "execution(* ru.netunix.aopspring.dao.AccountDao.findAccounts(..))",
             returning = "result"
@@ -31,18 +38,19 @@ public class LoggingAspect {
         convertNamesToUpperCase(result);
 
     }
+
     @AfterThrowing(
-            pointcut = "execution(* ru.netunix.aopspring.dao.AccountDao.findBooks(..))",
+            pointcut = "execution(* ru.netunix.aopspring.dao.AccountDao.findAccounts(..))",
             throwing = "theException"
     )
-    public void afterThrowingExceptionFindAccountsAdvice(JoinPoint joinPoint, Throwable theException){
+    public void afterThrowingExceptionFindAccountsAdvice(JoinPoint joinPoint, Throwable theException) {
         String methodName = joinPoint.getSignature().toShortString();
         System.out.println("=====>>>>> Executing @AfterThrowing advice after " + methodName);
         System.out.println("=====>>>>> theException is " + theException.toString());
     }
 
     private void convertNamesToUpperCase(List<Account> result) {
-        result.stream().forEach(s->s.setName(s.getName().toUpperCase()));
+        result.stream().forEach(s -> s.setName(s.getName().toUpperCase()));
     }
 
     @Before("ru.netunix.aopspring.aspect.AopPointcuts.forDaoPackageNoGettersNoSetters()")

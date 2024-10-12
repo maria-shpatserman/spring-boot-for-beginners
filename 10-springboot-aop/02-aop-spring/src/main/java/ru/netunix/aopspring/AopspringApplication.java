@@ -20,7 +20,8 @@ public class AopspringApplication {
     @Bean
     public CommandLineRunner commandLineRunner(AccountDao accountDao, MembershipDao membershipDao) {
         return runner -> {
-            demoTheAfterThrowingFindAccountsAdvice(accountDao);
+            demoTheAfterAdvice(accountDao);
+//            demoTheAfterThrowingFindAccountsAdvice(accountDao);
 //            demoTheAfterFindAccountsAdvice(accountDao);
 //            demoTheBeforeAdvice(accountDao);
 //            demoTheBeforeAdvice2(membershipDao);
@@ -29,8 +30,16 @@ public class AopspringApplication {
 //            account.setName("Mariia");
 //            demoTheBeforeAdvice3(accountDao, account);
 //            demoTheBeforeAdvice4(membershipDao, account);
-
         };
+    }
+
+    private void demoTheAfterAdvice(AccountDao accountDao) {
+        try {
+            List<Account> accounts = accountDao.findAccounts();
+            System.out.println("accounts = " + accounts);
+        } catch (Exception e) {
+            System.out.println("The Exception " + e.getMessage() + " happened");
+        }
     }
 
     private void demoTheAfterThrowingFindAccountsAdvice(AccountDao accountDao) {
@@ -38,14 +47,14 @@ public class AopspringApplication {
         try {
             List<Account> accounts = accountDao.findAccounts();
         } catch (Exception e) {
-            System.out.println("The Exception "+e.getMessage() +" happened");
+            System.out.println("The Exception " + e.getMessage() + " happened");
         }
     }
 
     private void demoTheAfterFindAccountsAdvice(AccountDao accountDao) throws Exception {
         List<Account> accounts = accountDao.findAccounts();
         System.out.println("\n\tMain program demoTheAfterFindAccountsAdvice()");
-        System.out.println("Raw accounts "+accounts);
+        System.out.println("Raw accounts " + accounts);
     }
 
     private void demoTheBeforeAdvice4(MembershipDao membershipDao, Account account) {
@@ -53,7 +62,7 @@ public class AopspringApplication {
     }
 
     private void demoTheBeforeAdvice3(AccountDao accountDao, Account account) {
-        accountDao.addAccount(account,true);
+        accountDao.addAccount(account, true);
     }
 
 
@@ -67,7 +76,7 @@ public class AopspringApplication {
         accountDao.setServiceCode("ServiceCode");
         accountDao.getName();
         accountDao.getServiceCode();
-        accountDao.addAccount(new Account("MyAccout",500),true);
+        accountDao.addAccount(new Account("MyAccout", 500), true);
 
     }
 }
