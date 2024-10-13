@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Bean;
 import ru.netunix.aopspring.dao.AccountDao;
 import ru.netunix.aopspring.dao.MembershipDao;
 import ru.netunix.aopspring.entity.Account;
+import ru.netunix.aopspring.service.TrafficFortuneService;
 
 import java.util.List;
 
@@ -18,9 +19,13 @@ public class AopspringApplication {
     }
 
     @Bean
-    public CommandLineRunner commandLineRunner(AccountDao accountDao, MembershipDao membershipDao) {
+    public CommandLineRunner commandLineRunner(AccountDao accountDao,
+                                               MembershipDao membershipDao,
+                                               TrafficFortuneService trafficFortuneService
+    ) {
         return runner -> {
-            demoTheAfterAdvice(accountDao);
+            demoTheAroundAdvice(trafficFortuneService);
+//            demoTheAfterAdvice(accountDao);
 //            demoTheAfterThrowingFindAccountsAdvice(accountDao);
 //            demoTheAfterFindAccountsAdvice(accountDao);
 //            demoTheBeforeAdvice(accountDao);
@@ -31,6 +36,14 @@ public class AopspringApplication {
 //            demoTheBeforeAdvice3(accountDao, account);
 //            demoTheBeforeAdvice4(membershipDao, account);
         };
+    }
+
+    private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
+        System.out.println("\nMain Program: demoTheAroundAdvice");
+        System.out.println("Calling getFortune()");
+        String data = trafficFortuneService.getFortune();
+        System.out.println("\nMy fortune is: " + data);
+        System.out.println("Finished");
     }
 
     private void demoTheAfterAdvice(AccountDao accountDao) {
