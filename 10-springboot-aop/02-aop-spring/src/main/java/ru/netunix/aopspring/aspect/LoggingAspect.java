@@ -31,7 +31,15 @@ public class LoggingAspect {
         //get begin timestamp
         long begin = System.currentTimeMillis();
         //execute the method
-        Object result = proceedingJoinPoint.proceed();
+        Object result = null;
+        try {
+            result = proceedingJoinPoint.proceed();
+        }
+        catch(Exception exception){
+            //swallow the exception
+            System.out.println(exception.getMessage());
+            result = "No worries. You are good to go.";
+        }
         System.out.println("=====>>>>> Executing @Around () advice proceed result " + result.toString());
         //get end timestamp
         long end = System.currentTimeMillis();

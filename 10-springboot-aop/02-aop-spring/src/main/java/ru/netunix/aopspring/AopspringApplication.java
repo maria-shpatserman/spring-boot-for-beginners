@@ -24,7 +24,8 @@ public class AopspringApplication {
                                                TrafficFortuneService trafficFortuneService
     ) {
         return runner -> {
-            demoTheAroundAdvice(trafficFortuneService);
+            demoTheAroundAdviceHandleException(trafficFortuneService);
+//            demoTheAroundAdvice(trafficFortuneService);
 //            demoTheAfterAdvice(accountDao);
 //            demoTheAfterThrowingFindAccountsAdvice(accountDao);
 //            demoTheAfterFindAccountsAdvice(accountDao);
@@ -36,6 +37,15 @@ public class AopspringApplication {
 //            demoTheBeforeAdvice3(accountDao, account);
 //            demoTheBeforeAdvice4(membershipDao, account);
         };
+    }
+
+    private void demoTheAroundAdviceHandleException(TrafficFortuneService trafficFortuneService) {
+        System.out.println("\nMain Program: demoTheAroundAdviceHandleException");
+        System.out.println("Calling getFortune()");
+        String data = trafficFortuneService.getFortune(true);
+        System.out.println("\nMy fortune is: " + data);
+        System.out.println("Finished");
+
     }
 
     private void demoTheAroundAdvice(TrafficFortuneService trafficFortuneService) {
