@@ -37,8 +37,9 @@ public class LoggingAspect {
         }
         catch(Exception exception){
             //swallow the exception
-            System.out.println(exception.getMessage());
-            result = "No worries. You are good to go.";
+            System.out.println("@Advice has a problem: "+exception.getMessage());
+            throw  exception;
+
         }
         System.out.println("=====>>>>> Executing @Around () advice proceed result " + result.toString());
         //get end timestamp
