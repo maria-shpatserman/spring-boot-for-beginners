@@ -2,6 +2,8 @@ package ru.netunix.crudeemployees.service;
 
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import ru.netunix.crudeemployees.dao.EmployeeDAO;
 import ru.netunix.crudeemployees.entity.Employee;
@@ -9,6 +11,7 @@ import ru.netunix.crudeemployees.entity.Employee;
 import java.util.List;
 
 @Service
+@CacheConfig(cacheNames = "employees")
 public class EmployeeServiceImpl implements EmployeeService {
     EmployeeDAO employeeDAO;
 
@@ -25,6 +28,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     }
 
     @Override
+    @Cacheable
     public Employee findById(int id) {
         return employeeDAO.findById(id);
     }

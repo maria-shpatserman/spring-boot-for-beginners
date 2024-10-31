@@ -26,6 +26,7 @@ public class EmployeeDAOJpaImpl implements EmployeeDAO {
 
     @Override
     public Employee findById(int id) {
+        System.out.println("Find employee in DB id = "+id);
         return entityManager.find(Employee.class, id);
     }
 
